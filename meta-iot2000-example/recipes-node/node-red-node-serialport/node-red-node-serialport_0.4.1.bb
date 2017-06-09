@@ -280,7 +280,10 @@ NPM_SHRINKWRAP := "${THISDIR}/${PN}/npm-shrinkwrap.json"
 inherit npm
 
 do_compile_append() {
+    PRE_COMPILE_DIR=${PWD}
+    cd "${S}/node_modules/serialport"
 	npm rebuild --build-from-source --arch=${TARGET_ARCH}
+    cd ${PRE_COMPILE_DIR}
 }
 
 LICENSE_${PN}-serialport-bindings = "Unknown"
